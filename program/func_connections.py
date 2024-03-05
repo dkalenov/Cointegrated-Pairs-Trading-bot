@@ -1,11 +1,8 @@
 from decouple import config
 from dydx3 import Client
 from web3 import Web3
-<<<<<<< HEAD
+
 from constants import (
-=======
-from constants import (coo
->>>>>>> c6d71de116e01c11d090984c78091fc4478e2a12
   HOST,
   ETHEREUM_ADDRESS,
   DYDX_API_KEY,
