@@ -10,6 +10,7 @@ from pprint import pprint
 # Get relevant time periods for ISO from and to
 ISO_TIMES = get_ISO_times()
 
+<<<<<<< HEAD
 # Get Candles Historical
 def get_candles_historical(client, market):
 
@@ -81,3 +82,26 @@ def construct_market_prices(client):
 
   # Return result
   return df
+=======
+pprint(ISO_TIMES)
+
+
+# Construct market prices
+def construct_market_prices(client):
+  pass
+
+  # # Declare variables
+  # tradeable_markets = []
+  # markets = client.public.get_markets()
+  #
+  # # Find tradeable pairs
+  # for market in markets.data["markets"].keys():
+  #   market_info = markets.data["markets"][market]
+  #   if market_info["status"] == "ONLINE" and market_info["type"] == "PERPETUAL":
+  #     tradeable_markets.append(market)
+  #
+  # # Set initial DateFrame
+  # close_prices = get_candles_historical(client, tradeable_markets[0])
+  # df = pd.DataFrame(close_prices)
+  # df.set_index("datetime", inplace=True)
+>>>>>>> c6d71de116e01c11d090984c78091fc4478e2a12
