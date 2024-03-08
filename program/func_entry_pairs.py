@@ -4,6 +4,8 @@ from func_public import get_candles_recent
 from func_cointegration import calculate_zscore
 from func_private import is_open_positions
 import pandas as pd
+from func_bot_agent import BotAgent
+import json
 
 
 from pprint import pprint
@@ -25,6 +27,15 @@ def open_positions(client):
 
   # Initialize container for BotAgent results
   bot_agents = []
+
+  # Opening JSON file
+  try:
+    open_positions_file = open("bot_agents.json")
+    open_positions_dict = json.load(open_positions_file)
+    for p in open_positions_dict:
+      bot_agents.append(p)
+  except:
+    bot_agents = []
 
   # Find ZScore triggers
   for index, row in df.iterrows():
@@ -101,8 +112,44 @@ def open_positions(client):
               break
 
             # Create Bot Agent
-            print(base_market, base_side, base_size, accept_base_price)
-            print(quote_market, quote_side, quote_size, accept_quote_price)
-            exit(1)
+            bot_agent = BotAgent(
+              client,
+              market_1=base_market,
+              market_2=quote_market,
+              base_side=base_side,
+              base_size=base_size,
+              base_price=accept_base_price,
+              quote_side=quote_side,
+              quote_size=quote_size,
+              quote_price=accept_quote_price,
+              accept_failsafe_base_price=accept_failsafe_base_price,
+              z_score=z_score,
+              half_life=half_life,
+              hedge_ratio=hedge_ratio
+            )
+
+            # Open Trades
+            bot_open_dict = bot_agent.open_trades()
+
+            # Guard: Handle failure
+            if bot_open_dict == "failed":
+              continue
+
+            # Handle success in opening trades
+            if bot_open_dict["pair_status"] == "LIVE":
+              # Append to list of bot agents
+              bot_agents.append(bot_open_dict)
+              del(bot_open_dict)
+
+              # Confirm live status in print
+              print("Trade status: Live")
+              print("---")
+
+        # Save agents
+        print(f"Success: {len(bot_agents)} New Pairs LIVE")
+        if len(bot_agents) > 0:
+          with open("bot_agents.json", "w") as f:
+            json.dump(bot_agents, f)
+
 
 
