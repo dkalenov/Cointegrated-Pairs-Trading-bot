@@ -1,7 +1,6 @@
 from decouple import config
 from dydx3 import Client
 from web3 import Web3
-
 from constants import (
   HOST,
   ETHEREUM_ADDRESS,

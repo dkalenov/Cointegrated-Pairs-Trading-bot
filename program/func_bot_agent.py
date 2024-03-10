@@ -1,5 +1,6 @@
 from func_private import place_market_order, check_order_status
 from datetime import datetime, timedelta
+from func_messaging import send_message
 import time
 
 from pprint import pprint
@@ -190,7 +191,8 @@ class BotAgent:
           print("Unexpected Error")
           print(order_status_close_order)
 
-        # !!!!ADD MESSAGE OUTPUT HERE!!!!
+          # Send Message
+          send_message("Failed to execute. Code red. Error code: 100")
 
           # ABORT
           exit(1)
@@ -201,12 +203,13 @@ class BotAgent:
         print("Unexpected Error")
         print(order_status_close_order)
 
-        # !!!!ADD MESSAGE OUTPUT HERE!!!!
+        # Send Message
+        send_message("Failed to execute. Code red. Error code: 101")
 
         # ABORT
         exit(1)
 
-        # Return success result
+    # Return success result
     else:
       self.order_dict["pair_status"] = "LIVE"
       return self.order_dict

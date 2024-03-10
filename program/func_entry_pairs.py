@@ -3,20 +3,18 @@ from func_utils import format_number
 from func_public import get_candles_recent
 from func_cointegration import calculate_zscore
 from func_private import is_open_positions
-import pandas as pd
 from func_bot_agent import BotAgent
+import pandas as pd
 import json
-
 
 from pprint import pprint
 
 
 # Open positions
 def open_positions(client):
-
   """
     Manage finding triggers for trade entry
-    Store trades for managing later exit function
+    Store trades for managing later on exit function
   """
 
   # Load cointegrated pairs
@@ -50,7 +48,7 @@ def open_positions(client):
     series_1 = get_candles_recent(client, base_market)
     series_2 = get_candles_recent(client, quote_market)
 
-  # Get ZScore
+    # Get ZScore
     if len(series_1) > 0 and len(series_1) == len(series_2):
       spread = series_1 - (hedge_ratio * series_2)
       z_score = calculate_zscore(spread).values.tolist()[-1]
@@ -139,17 +137,16 @@ def open_positions(client):
             if bot_open_dict["pair_status"] == "LIVE":
               # Append to list of bot agents
               bot_agents.append(bot_open_dict)
-              del(bot_open_dict)
+              del (bot_open_dict)
 
               # Confirm live status in print
               print("Trade status: Live")
               print("---")
 
-        # Save agents
-        print(f"Success: {len(bot_agents)} New Pairs LIVE")
-        if len(bot_agents) > 0:
-          with open("bot_agents.json", "w") as f:
-            json.dump(bot_agents, f)
-
+  # Save agents
+  print(f"Success: Manage open trades checked")
+  if len(bot_agents) > 0:
+    with open("bot_agents.json", "w") as f:
+      json.dump(bot_agents, f)
 
 
