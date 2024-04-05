@@ -8,7 +8,7 @@ Develop a bot that analyzes the market and finds cointegrated currency pairs, au
 
 I am taking a course on trading bots, specifically focusing on using Python to interact with the DYDX Layer 2 Ethereum trading exchange. The course teaches how to run a trading bot on AWS Elastic Cloud Compute (EC2) and emphasizes utilizing statistical arbitrage opportunities in Pairs Trading. This strategy is particularly valuable because it takes advantage of the close relationship between various cryptocurrencies in terms of price behavior.
 
-The trading bot I am working on will be able to send notifications via Telegram, providing live updates on the script's performance. It offers the following functionalities:
+The trading bot I am working on can send notifications via Telegram, providing live updates on the script's performance. It offers the following functionalities:
 
 1. Automatically close any existing open positions.
 2. Identify cointegrated (linked Crypto pairs) for trading and determine whether it is statistically profitable to open a trade.
