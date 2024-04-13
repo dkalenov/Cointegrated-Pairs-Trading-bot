@@ -34,14 +34,13 @@ The trading bot I am working on can send notifications via Telegram, providing l
 
 ## Conclusion
 
-At this stage, the bot is running on a local server on a test account. The bot can analyze the market, find cointegrated pairs, and open and close trades. 
-The bot shows unstable trading success. It is necessary to adjust the selection of cointegrated currency pairs.
+Deployed the bot on AWS Elastic Cloud Compute (EC2) server, the bot is trading on a test account. The bot can analyze the market, find cointegrated pairs, and open and close trades. 
+Initial capital in bot management is $1830 13/04/2024
 
 ## Further development
 
 - Adjust the selection of cointegrated currency pairs;
 - Add a cryptocurrency volatility analysis function;
-- Deploy the bot on AWS Elastic Cloud Compute (EC2).
 
 ## Skills and tools 
 
@@ -53,9 +52,10 @@ The bot shows unstable trading success. It is necessary to adjust the selection 
 * DYDX API
 * Statistical arbitrage
 * Telegram API
+* AWS Elastic Cloud Compute
   
 ## Project status
 - [x] Starting the bot
-- [ ] Bot testing in progress
+- [x] Deploy the bot on Cloud Compute
+- [x] Bot testing in progress
 - [ ] Bot tuning
-- [ ] Deploy the bot on Cloud Compute
